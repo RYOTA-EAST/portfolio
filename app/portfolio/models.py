@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.base import Model
-
+import math
 # Create your models here.
 
 class Profile(models.Model):
@@ -30,6 +30,14 @@ class Skill(models.Model):
     name = models.CharField('名前', max_length=100)
     years = models.FloatField('経験年数', default=0)
     description = models.ForeignKey(Description, on_delete=models.SET_NULL, null=True, verbose_name='説明文')
+
+    def years_rounded(self):
+      years = self.years * 12
+      if years.is_integer():
+        years = int(years)
+      else:
+        years = math.floor(years)
+      return years
 
     def __str__(self):
         return self.name
