@@ -12,3 +12,10 @@ def index(request):
     'works': works,
   }
   return render(request, 'index.html', context)
+
+def works(request):
+  works = Work.objects.all().order_by('-published')
+  context = {
+    'works':works,
+  }
+  return render(request, 'works.html', context)
