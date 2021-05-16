@@ -31,13 +31,14 @@ class Skill(models.Model):
     years = models.FloatField('経験年数', default=0)
     description = models.ForeignKey(Description, on_delete=models.SET_NULL, null=True, verbose_name='説明文')
 
-    def years_rounded(self):
-      years = self.years * 12
-      if years.is_integer():
-        years = int(years)
-      else:
-        years = math.floor(years)
-      return years
+    def experience_return(self):
+        if self.years < 1:
+            experience = str(math.floor(self.years * 12)) + "ヶ月"
+        elif self.years.is_integer():
+            experience = str(int(self.years)) + "年"
+        else:
+            experience = str(self.years) + "年"
+        return experience
 
     def __str__(self):
         return self.name
