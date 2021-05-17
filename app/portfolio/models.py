@@ -51,6 +51,7 @@ class Work(models.Model):
     image = models.ImageField('イメージ', upload_to='works', null=True, blank=True)
     url = models.URLField('URL')
     published = models.DateField('公開日', null=True, blank=True)
+    skills = models.ManyToManyField(Skill, blank=True)
 
     def __str__(self):
         return self.title

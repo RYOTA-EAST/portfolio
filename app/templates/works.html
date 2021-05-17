@@ -13,8 +13,8 @@
     <div class="row">
       {% for work in works %}
         <div class="col-lg-4 mb-3">
-          <a href="{{ work.url }}" target="_blank">
-            <div class="card shadow-sm border border-light">
+          <div class="card shadow-sm border border-light">
+            <a href="{{ work.url }}" target="_blank">
               <div>
                 <img src="
                 {% if work.image %}
@@ -27,8 +27,14 @@
               <div class="p-3">
                 <h5 class="text-dark mb-0">{{ work.title }}</h5>
               </div>
-            </div>
           </a>
+              <div class="pubkished">公開日：{{ work.published }}</div>
+              <div class="skills">使用技術：
+                {% for skill in work.skills.all %}
+                  <span class="badge bg-primary py-1 px-2 font-14">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
         </div>
       {% endfor %}
     </div>
