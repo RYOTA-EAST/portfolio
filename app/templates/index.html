@@ -4,8 +4,11 @@
 
 {% block main %}
 
-<header class="header">
+<div class="header">
   <div class="container">
+    <div class="pt-5" id="profile">
+      <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-user-alt"></i> Profile</h3>
+    </div>
     <div class="text-center">
     
       <div class="mb-4">
@@ -45,12 +48,14 @@
 
     </div>
   </div>
-</header>
+</div>
 
 <section class="mb-100">
   <div class="container">
-    <h3 class="display-4 font-weight-bold text-primary">SKILLS</h3>
-    <div class="row">
+    <div class="pt-5" id="skill">
+      <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> SKILL</h3>
+    </div>
+      <div class="row">
       <div class="col-md-10 mx-auto py-4">
         <table class="table table-borderless">
           {% for skill in skills %}
@@ -69,7 +74,9 @@
 <section>
   <div class="container">
     <div>
-      <h3 class="display-4 font-weight-bold text-primary">WORKS</h3>
+      <div class="pt-5" id="work">
+        <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-laptop-code"></i> WORKS</h3>
+      </div>
       <div class="row">
         {% for work in works %}
         <div class="col-lg-4 mb-3">
