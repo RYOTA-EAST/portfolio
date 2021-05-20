@@ -1,5 +1,7 @@
-from pathlib import Path
 import os
+import environ
+import django_heroku
+from pathlib import Path
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,12 +11,24 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY_PORTFOLIO') # 環境変数でシークレットキーを取得
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR,'.env'))
+
+IS_ON_HEROKU = env.bool('ON_HEROKU', default=False)
+
+if not IS_ON_HEROKU:
+    env.read_env(os.path.join(BASE_DIR,'.env'))
+
+SECRET_KEY = env('SECRET_KEY')# 環境変数でシークレットキーを取得
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.get_value('DEBUG', cast = bool)
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['ryo-east-portfolio.herokuapp.com']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls' #プロジェクト名をxxxに入れる
@@ -110,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
@@ -124,3 +139,7 @@ MEDIA_ROOT = 'media/'
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2000
 FILE_UPLOAD_MAX_MEMORY_SIZE = 15728640
 DATA_UPLOAD_MAX_MEMORY_SIZE = 15728640
+
+django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
