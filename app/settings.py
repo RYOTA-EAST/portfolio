@@ -12,7 +12,6 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 env = environ.Env()
-env.read_env(os.path.join(BASE_DIR,'.env'))
 
 IS_ON_HEROKU = env.bool('ON_HEROKU', default=False)
 
