@@ -57,15 +57,23 @@
     </div>
       <div class="row">
       <div class="col-md-10 mx-auto py-4">
-        <table class="table table-borderless">
-          {% for skill in skills %}
-          <tr>
-            <td class="align-middle h4 font-weight-bold text-dark">{{ skill.name }}</td>
-            <td class="align-middle"><span class="badge bg-primary py-1 px-2 font-14">{{ skill.experience_return }}</span></td>
-            <td class="align-middle">{{ skill.description }}</td>
-          </tr>
-          {% endfor %}
-        </table>
+        {% regroup skills by get_genre_display as genre_list %}
+        <!-- {{ genre_list }} -->
+        {% for genre in genre_list %}
+          <div class="skill bg-secondary">
+            <h4 class="mt-5 text-white">--------- {{ genre.grouper }} ---------</h4>
+            <table class="table table-borderless">
+              {% for skill in genre.list %}
+              <tr>
+                <!-- <td class="align-middle h6 font-weight-bold text-dark">{{ skill.get_genre_display }}</td> -->
+                <td class="align-middle h4 font-weight-bold text-dark col-2">{{ skill.name }}</td>
+                <td class="align-middle col-1"><span class="badge bg-primary py-1 px-2 font-14">{{ skill.experience_return }}</span></td>
+                <td class="align-middle">{{ skill.description }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

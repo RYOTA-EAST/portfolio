@@ -3,6 +3,13 @@ from django.db.models.base import Model
 import math
 # Create your models here.
 
+CHOICES = (
+    ("0", "フロントエンド"),
+    ("1", "バックエンド"),
+    ("2", "デプロイ"),
+    ("3", "その他"),
+)
+
 class Profile(models.Model):
     name = models.CharField('名前', max_length=100)
     image = models.ImageField('イメージ', upload_to='profile')
@@ -30,7 +37,7 @@ class Skill(models.Model):
     name = models.CharField('名前', max_length=100)
     years = models.FloatField('経験年数', default=0)
     description = models.ForeignKey(Description, on_delete=models.SET_NULL, null=True, verbose_name='説明文')
-
+    genre = models.CharField('ジャンル', choices=CHOICES, max_length=1, default="")
     def experience_return(self):
         if self.years < 1:
             experience = str(math.floor(self.years * 12)) + "ヶ月"

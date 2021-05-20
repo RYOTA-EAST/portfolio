@@ -3,7 +3,7 @@ from .models import Profile, Skill, Work
 
 def index(request):
   profile = Profile.objects.all().last()
-  skills = Skill.objects.all()
+  skills = Skill.objects.all().order_by('genre')
   works = Work.objects.all().order_by('-published')[:3]
 
   context = {
