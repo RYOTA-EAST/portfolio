@@ -14,6 +14,21 @@
   <link rel="stylesheet" href="{% static 'assets/css/portfolio.css' %}">
 </head>
 <body>
+  <header class="sticky-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <a href="/"><h3 lass="display-4 font-weight-bold text-primary">ryo-East's portfolio</h4></a>
+        </div>
+        <div class="col d-flex justify-content-around">
+          <a href="#profile"><i class="fas fa-user-alt"></i>Profile</a>
+          <a href="#skill"><i class="fas fa-clipboard-list"></i>Skill</a>
+          <a href="#work"><i class="fas fa-laptop-code"></i>Work</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   {% block main %}{% endblock %}
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>

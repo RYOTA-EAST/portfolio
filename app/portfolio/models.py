@@ -3,6 +3,13 @@ from django.db.models.base import Model
 import math
 # Create your models here.
 
+CHOICES = (
+    ("0", "フロントエンド"),
+    ("1", "バックエンド"),
+    ("2", "デプロイ"),
+    ("3", "その他"),
+)
+
 class Profile(models.Model):
     name = models.CharField('名前', max_length=100)
     image = models.ImageField('イメージ', upload_to='profile')
@@ -30,14 +37,15 @@ class Skill(models.Model):
     name = models.CharField('名前', max_length=100)
     years = models.FloatField('経験年数', default=0)
     description = models.ForeignKey(Description, on_delete=models.SET_NULL, null=True, verbose_name='説明文')
-
-    def years_rounded(self):
-      years = self.years * 12
-      if years.is_integer():
-        years = int(years)
-      else:
-        years = math.floor(years)
-      return years
+    genre = models.CharField('ジャンル', choices=CHOICES, max_length=1, default="")
+    def experience_return(self):
+        if self.years < 1:
+            experience = str(math.floor(self.years * 12)) + "ヶ月"
+        elif self.years.is_integer():
+            experience = str(int(self.years)) + "年"
+        else:
+            experience = str(self.years) + "年"
+        return experience
 
     def __str__(self):
         return self.name
@@ -50,6 +58,7 @@ class Work(models.Model):
     image = models.ImageField('イメージ', upload_to='works', null=True, blank=True)
     url = models.URLField('URL')
     published = models.DateField('公開日', null=True, blank=True)
+    skills = models.ManyToManyField(Skill, blank=True)
 
     def __str__(self):
         return self.title
