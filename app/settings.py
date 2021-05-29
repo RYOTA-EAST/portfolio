@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portfolio',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -123,11 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images) and Media files
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
-]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media/'
@@ -142,3 +139,17 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 15728640
 django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# 共通の設定
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+
+
+# 静的ファイルの設定
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+# メディアファイルの設定。今回は「project」というプロジェクト名の例
+DEFAULT_FILE_STORAGE = 'app.backends.MediaStorage'
