@@ -30,6 +30,13 @@
           <span>{{ profile.age }}歳</span>
         {% endif %}
       </div>
+
+      <div>
+        <h3>
+          学習開始は{{ start_day }}で<br>
+          今日で{{ days }}日、継続中です。
+        </h3>
+      </div>
     
       <div class="mb-3">
         {%if profile.twitter %}<a href="{{ profile.twitter }}" target="_blank"><i class="fab fa-twitter sns-icon text-twitter"></i></a>{% endif %}
