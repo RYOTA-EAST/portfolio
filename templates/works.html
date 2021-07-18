@@ -3,12 +3,20 @@
 {% load static %}
 
 {% block main %}
-
 <section>
   <a href="/" class="re-btn mt-5"><i class="fas fa-arrow-left"></i> 戻る</a>
   <div class="container">
     <div class="text-center py-5">
       <h3 class="display-4 font-weight-bold text-primary">WORKS</h3>
+      
+      <form action="">
+        <input type="text" name="search" value="{{ request.GET.search }}" placeholder="django(使用技術)">
+        <button class="btn btn-sm btn-primary">検索</button>
+        {% if request.GET.search %}
+          <a href="/works" class="btn btn-sm btn-danger">クリア</a>
+        {% endif %}
+      </form>
+    
     </div>
     <div class="row">
       {% for work in works %}

@@ -19,7 +19,12 @@ def index(request):
   return render(request, 'index.html', context)
 
 def works(request):
-  works = Work.objects.all().order_by('-published')
+  requesst_get = request.GET
+  search = requesst_get.get('search')
+  if search:
+    works = Work.objects.filter(skills__name__icontains=search)
+  else:
+    works = Work.objects.all().order_by('-published')
   context = {
     'works':works,
   }
