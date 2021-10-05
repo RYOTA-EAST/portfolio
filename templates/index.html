@@ -4,50 +4,56 @@
 
 {% block main %}
 
-<div class="header">
+<div class="mt-5">
   <div class="container">
-    <div class="pt-5" id="profile">
-      <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-user-alt"></i> Profile</h3>
+    <div class="text-center mb-3", id="profile">
+      <h3 class="display-6 font-weight-bold text-primary"><i class="fas fa-user-alt"></i> Profile</h3>
     </div>
-    <div class="text-center">
-    
-      <div class="mb-4">
-        <img src="{% static 'assets/img/profile.png' %}" alt="" height="180" width="180" class="rounded-circle img-center-cover">
-      </div>
+    <div class="">
+      <div class="row">
+        <div class="col text-center">
+          <div class="mb-4">
+            <img src="{% static 'assets/img/profile.png' %}" alt="" height="180" width="180" class="rounded-circle img-center-cover">
+          </div>
+        </div>
 
-      <h2 class="text-dark header-title mb-3">{{ profile.name }}</h2>
-    
-      <div class="mb-3">
-        {% if profile.career %}
-          <span>{{ profile.career }}</span>
-          <span>/</span>
-        {% endif %}
-        {% if profile.org %}
-          <span>{{ profile.org }}</span>
-          <span>/</span>
-        {% endif %}
-        {% if profile.age %}
-          <span>{{ profile.age }}歳</span>
-        {% endif %}
-      </div>
+        <div class="col text-left">
+          <h2 class="text-dark header-title mb-3">{{ profile.name }}</h2>
+          
+          <div class="mb-3">
+            {% if profile.career %}
+            <span>{{ profile.career }}</span>
+            <span>/</span>
+            {% endif %}
+            {% if profile.org %}
+            <span>{{ profile.org }}</span>
+            <span>/</span>
+            {% endif %}
+            {% if profile.age %}
+            <span>{{ profile.age }}歳</span>
+            {% endif %}
+          </div>
+          
+          
+          <div>
+            <h3>
+              学習開始:{{ start_day }}<br>
+              {{ days }}日継続中です。
+            </h3>
+          </div>
+          
+          <div class="mb-3">
+            {%if profile.twitter %}<a href="{{ profile.twitter }}" target="_blank"><i class="fab fa-twitter sns-icon text-twitter"></i></a>{% endif %}
+            {%if profile.facebook %}<a href="{{ profile.facebook }}" target="_blank"><i class="fab fa-facebook sns-icon text-facebook"></i></a>{% endif %}
+            {%if profile.instagram %}<a href="{{ profile.instagram }}" target="_blank"><i class="fab fa-instagram sns-icon text-instagram"></i></a>{% endif %}
+          </div>
+        </div>
 
-      <div>
-        <h3>
-          学習開始は{{ start_day }}で<br>
-          今日で{{ days }}日、継続中です。
-        </h3>
-      </div>
-    
-      <div class="mb-3">
-        {%if profile.twitter %}<a href="{{ profile.twitter }}" target="_blank"><i class="fab fa-twitter sns-icon text-twitter"></i></a>{% endif %}
-        {%if profile.facebook %}<a href="{{ profile.facebook }}" target="_blank"><i class="fab fa-facebook sns-icon text-facebook"></i></a>{% endif %}
-        {%if profile.instagram %}<a href="{{ profile.instagram }}" target="_blank"><i class="fab fa-instagram sns-icon text-instagram"></i></a>{% endif %}
-      </div>
-      <div class="container">
+        <div class="container">
         <div class="row">
-          <div class="col-mb-9 mx-auto bg-secondary text-white">
+          <div class="col-mb-9 mx-auto text-center mb-3">
             <div class="mt-3">
-              <p class="lead text-light">{{ profile.introduction|safe|linebreaksbr }}</p>
+              <p class="lead">{{ profile.introduction|safe|linebreaksbr }}</p>
             </div>
           </div>
         </div>
@@ -57,69 +63,69 @@
   </div>
 </div>
 
-<section class="mb-100">
-  <div class="container">
-    <div class="pt-5" id="skill">
-      <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> SKILL</h3>
-    </div>
-      <div class="row">
-      <div class="col-md-10 mx-auto py-4">
-        {% regroup skills by get_genre_display as genre_list %}
-        <!-- {{ genre_list }} -->
-        {% for genre in genre_list %}
-          <div class="skill bg-secondary">
-            <h4 class="mt-5 text-white">--------- {{ genre.grouper }} ---------</h4>
-            <table class="table table-borderless">
-              {% for skill in genre.list %}
-              <tr>
-                <!-- <td class="align-middle h6 font-weight-bold text-dark">{{ skill.get_genre_display }}</td> -->
-                <td class="align-middle h4 font-weight-bold text-dark col-2">{{ skill.name }}</td>
-                <td class="align-middle col-1"><span class="badge bg-primary py-1 px-2 font-14">{{ skill.experience_return }}</span></td>
-                <td class="align-middle">{{ skill.description }}</td>
-              </tr>
-              {% endfor %}
-            </table>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
+<hr>
 
-<section>
-  <div class="container">
-    <div>
-      <div class="pt-5" id="work">
-        <h3 class="display-4 font-weight-bold text-primary"><i class="fas fa-laptop-code"></i> WORKS</h3>
-      </div>
-      <div class="row">
-        {% for work in works %}
-        <div class="col-lg-4 mb-3">
-          <a href="{{ work.url }}" target="_blank">
-            <div class="card shadow-sm border border-light">
-              <div>
-                <img src="
-                {% if work.image %}
-                  {{ work.image.url }}
-                {% else %}
-                  {% static 'assets/img/profile.png' %}
-                {% endif %}
-                " class="w-100 img-center-cover" height="200" alt="">
-              </div>
-              <div class="p-3">
-                <h5 class="text-dark mb-0">{{ work.title }}</h5>
-              </div>
-            </div>
-          </a>
+<div class="container">
+  <div class="pt-3 text-center mb-3" id="skill">
+    <h3 class="display-6 font-weight-bold text-primary"><i class="fas fa-clipboard-list"></i> SKILL</h3>
+  </div>
+    <div class="row">
+    <div class="col-md-10 mx-auto">
+      {% regroup skills by get_genre_display as genre_list %}
+      <!-- {{ genre_list }} -->
+      {% for genre in genre_list %}
+      <h4 class="mt-3">--------- {{ genre.grouper }} ---------</h4>
+        <div class="skill">
+          <table class="table table-borderless">
+            {% for skill in genre.list %}
+            <tr>
+              <!-- <td class="align-middle h6 font-weight-bold text-dark">{{ skill.get_genre_display }}</td> -->
+              <td class="align-middle h5 font-weight-bold text-dark col-2">{{ skill.name }}</td>
+              <td class="align-middle col-1"><span class="badge bg-primary py-1 px-2 font-14">{{ skill.experience_return }}</span></td>
+              <td class="align-middle">{{ skill.description }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
-        {% endfor %}
-
-      <div class="text-end mb-3">
-        <a href="{% url 'portfolio:works' %}" class="btn btn-lg btn-primary">View All Works <i class="far fa-list-alt pl-1"></i></a>
-      </div>
-
+      {% endfor %}
     </div>
   </div>
-</section>
+</div>
+
+<hr>
+
+<div class="container">
+  <div>
+    <div class="pt-3 text-center mb-5" id="work">
+      <h3 class="display-6 font-weight-bold text-primary"><i class="fas fa-laptop-code"></i> WORKS</h3>
+    </div>
+    <div class="row">
+      {% for work in works %}
+      <div class="col-lg-4 mb-3">
+        <a href="{{ work.url }}" target="_blank">
+          <div class="card shadow-sm border border-light">
+            <div>
+              <img src="
+              {% if work.image %}
+                {{ work.image.url }}
+              {% else %}
+                {% static 'assets/img/profile.png' %}
+              {% endif %}
+              " class="w-100 img-center-cover" height="200" alt="">
+            </div>
+            <div class="p-3">
+              <h5 class="text-dark mb-0">{{ work.title }}</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+    <div class="text-end mb-3">
+      <a href="{% url 'portfolio:works' %}" class="btn btn-lg btn-primary">View All Works <i class="far fa-list-alt pl-1"></i></a>
+    </div>
+
+  </div>
+</div>
 
 {% endblock %}
