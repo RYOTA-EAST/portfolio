@@ -20,30 +20,36 @@
     </div>
     <div class="row">
       {% for work in works %}
-        <div class="col-lg-4 mb-3">
-          <div class="card shadow-sm border border-light">
+        <div class="col-lg-6 mb-3">
+          <div class="card h-100 shadow-sm border border-info">
             <a href="{{ work.url }}" target="_blank">
-              <div>
+              <div class="px-3 py-2 text-center">
+                <h5 class="text-dark mb-0">{{ work.title }}</h5>
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
                 <img src="
                 {% if work.image %}
                   {{ work.image.url }}
                 {% else %}
                   {% static 'assets/img/profile.png' %}
                 {% endif %}
-                " class="w-100 img-center-cover" height="200" alt="">
+                " class="img-center-cover border border-info rounded" height="200px" width="300px" alt="">
               </div>
-              <div class="p-3">
-                <h5 class="text-dark mb-0">{{ work.title }}</h5>
-              </div>
-          </a>
+              <hr class="border border-info">
+            </a>
+            <div class="pb-3 ps-4">
               <div class="pubkished">公開日：{{ work.published }}</div>
               <div class="skills">使用技術：
                 {% for skill in work.skills.all %}
-                  <span class="badge bg-primary py-1 px-2 font-14">{{ skill }}</span>
+                <span class="badge bg-primary py-1 px-2 font-14">{{ skill }}</span>
                 {% endfor %}
               </div>
+              <div class="work-description" height="300px">
+                <span class="text-dark">説明：{{ work.description|safe|linebreaksbr }}</span>
+              </div>
             </div>
-        </div>
+          </div>
+      </div>
       {% endfor %}
     </div>
   </div>

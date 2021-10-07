@@ -1,13 +1,16 @@
 from django.db import models
 from django.db.models.base import Model
 import math
+
+from django.db.models.fields import CharField
 # Create your models here.
 
 CHOICES = (
     ("0", "フロントエンド"),
     ("1", "バックエンド"),
     ("2", "デプロイ"),
-    ("3", "その他"),
+    ("3", "電子回路"),
+    ("4", "その他"),
 )
 
 class Profile(models.Model):
@@ -16,10 +19,11 @@ class Profile(models.Model):
     career = models.CharField('職業', max_length=55, null=True, blank=True)
     org = models.CharField('所属組織', max_length=55, null=True, blank=True)
     age = models.CharField('年齢', max_length=55, null=True, blank=True)
+    hobby = models.TextField('趣味', null=True, blank=True)
     twitter = models.URLField('TwitterのURL', null=True, blank=True)
     facebook = models.URLField('FacebookのURL', null=True, blank=True)
     instagram = models.URLField('InstagramのURL', null=True, blank=True)
-    introduction = models.TextField('自己紹介文')
+    introduction = models.TextField('自己紹介文', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'プロフィール'
@@ -56,9 +60,10 @@ class Skill(models.Model):
 class Work(models.Model):
     title = models.CharField('タイトル', max_length=100)
     image = models.ImageField('イメージ', upload_to='works', null=True, blank=True)
-    url = models.URLField('URL')
+    url = models.URLField('URL', blank=True)
     published = models.DateField('公開日', null=True, blank=True)
     skills = models.ManyToManyField(Skill, blank=True)
+    description = models.TextField('説明文', null=True, blank=True)
 
     def __str__(self):
         return self.title
