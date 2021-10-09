@@ -33,19 +33,21 @@
                 {% else %}
                   {% static 'assets/img/profile.png' %}
                 {% endif %}
-                " class="img-center-cover border border-info rounded" height="200px" width="300px" alt="">
+                " class="img-center-cover border border-info rounded" height="200px" alt="">
               </div>
               <hr class="border border-info">
             </a>
-            <div class="pb-3 ps-4">
-              <div class="pubkished">公開日：{{ work.published }}</div>
-              <div class="skills">使用技術：
+            <div class="pb-3 px-4">
+              <div class="pubkished mb-2">完成日：{{ work.published }}</div>
+              <div class="skills mb-2">使用技術：
                 {% for skill in work.skills.all %}
                 <span class="badge bg-primary py-1 px-2 font-14">{{ skill }}</span>
                 {% endfor %}
               </div>
-              <div class="work-description" height="300px">
-                <span class="text-dark">説明：{{ work.description|safe|linebreaksbr }}</span>
+              <div class="alert-info">
+                <div class="card-body">
+                  <span class="text-dark">{{ work.description|safe|linebreaksbr }}</span>
+                </div>
               </div>
             </div>
           </div>
