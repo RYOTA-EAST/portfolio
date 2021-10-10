@@ -9,16 +9,22 @@
     <div class="text-center mb-3", id="profile">
       <h3 class="display-6 font-weight-bold text-primary"><i class="fas fa-user-alt"></i> Profile</h3>
     </div>
-    <div class="">
+    <div class="plofile d-flex justify-content-center align-items-center">
+
       <div class="row">
-        <div class="col-4 d-flex justify-content-end align-items-center">
+        <div class="col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
           <div class="mb-4">
             <img src="{% static 'assets/img/profile.png' %}" alt="" height="180" width="180" class="rounded-circle img-center-cover">
           </div>
         </div>
 
-        <div class="col text-left">
+        <div class="col">
           <h2 class="text-dark header-title mb-3">{{ profile.name }}</h2>
+          <div class="mb-3">
+              {%if profile.twitter %}<a href="{{ profile.twitter }}" target="_blank"><i class="fab fa-twitter sns-icon text-twitter"></i></a>{% endif %}
+              <!-- {%if profile.facebook %}<a href="{{ profile.facebook }}" target="_blank"><i class="fab fa-facebook sns-icon text-facebook"></i></a>{% endif %} -->
+              {%if profile.instagram %}<a href="{{ profile.instagram }}" target="_blank"><i class="fab fa-instagram sns-icon text-instagram"></i></a>{% endif %}
+          </div>
           
           <div class="mb-3">
             {% if profile.career %}
@@ -43,25 +49,20 @@
               {{ days }}日継続中です。
             </h3>
           </div>
-          
-          <div class="mb-3">
-            {%if profile.twitter %}<a href="{{ profile.twitter }}" target="_blank"><i class="fab fa-twitter sns-icon text-twitter"></i></a>{% endif %}
-            {%if profile.facebook %}<a href="{{ profile.facebook }}" target="_blank"><i class="fab fa-facebook sns-icon text-facebook"></i></a>{% endif %}
-            {%if profile.instagram %}<a href="{{ profile.instagram }}" target="_blank"><i class="fab fa-instagram sns-icon text-instagram"></i></a>{% endif %}
-          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="container">
-        <div class="row">
-          <div class="col-mb-9 mx-auto text-center mb-3 d-flex justify-content-center">
-            <div class="alert-info mt-3 w-75 pt-3">
-              <p class="lead">{{ profile.introduction|safe|linebreaksbr }}</p>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-mb-9 mx-auto text-center mb-3 d-flex justify-content-center">
+          <div class="alert-info mt-3 w-75 pt-3">
+            <p class="lead">{{ profile.introduction|safe|linebreaksbr }}</p>
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </div>
 
