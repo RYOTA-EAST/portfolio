@@ -22,21 +22,48 @@
       {% for work in works %}
         <div class="col-lg-6 mb-3">
           <div class="card h-100 shadow-sm border border-info">
-            <a href="{{ work.url }}" target="_blank">
-              <div class="px-3 py-2 text-center">
-                <h5 class="text-dark mb-0">{{ work.title }}</h5>
-              </div>
-              <div class="d-flex justify-content-center align-items-center">
-                <img src="
-                {% if work.image %}
-                  {{ work.image.url }}
+            <div class="px-3 py-2 text-center">
+
+              {% if work.url %}
+              <div class="row">
+                {% if "play.google" in work.url %}
+                  <div class="col app-title text-end">
+                    <a href="{{ work.url }}" target="_blank" class="btn btn-primary">
+                      <h5 class="text-white mb-0">{{ work.title }}</h5>
+                    </a>
+                  </div>
+                  <div class="col app-img text-start">
+                    <a href="{{ work.url }}" target="_blank">
+                      <img
+                      src="{% static 'assets/img/google-play-badge.png' %}"
+                      height="50px"
+                      >
+                    </a>
+                  </div>
                 {% else %}
-                  {% static 'assets/img/profile.png' %}
+                  <div class="col app-title">
+                    <a href="{{ work.url }}" target="_blank" class="btn btn-primary">
+                      <h5 class="text-white mb-0">{{ work.title }}</h5>
+                    </a>
+                  </div>
                 {% endif %}
-                " class="img-center-cover border border-info rounded" height="200px" alt="">
               </div>
-              <hr class="border border-info">
-            </a>
+
+              {% else %}
+                <h5 class="text-dark mb-0">{{ work.title }}</h5>
+              {% endif %}
+
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <img src="
+              {% if work.image %}
+                {{ work.image.url }}
+              {% else %}
+                {% static 'assets/img/profile.png' %}
+              {% endif %}
+              " class="img-center-cover border border-info rounded" height="200px" alt="">
+            </div>
+            <hr class="border border-info">
             <div class="pb-3 px-4">
               <div class="pubkished mb-2">完成日：{{ work.published }}</div>
               <div class="skills mb-2">使用技術：
