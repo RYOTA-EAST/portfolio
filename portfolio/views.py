@@ -3,6 +3,7 @@ from .models import Profile, Skill, Work
 import datetime
 
 def index(request):
+  template = "index"
   profile = Profile.objects.all().last()
   skills = Skill.objects.all().order_by('genre')
   works = Work.objects.all().order_by('-published')[:3]
@@ -10,6 +11,7 @@ def index(request):
   days = (datetime.date.today() - start_day).days + 1
 
   context = {
+    'template': template,
     'profile': profile,
     'skills': skills,
     'works': works,
