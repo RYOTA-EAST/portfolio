@@ -21,9 +21,11 @@
           <a href="/" class="btn btn-primary"><h4 lass="display-4 font-weight-bold text-danger">Ryota Higashi portfolio</h4></a>
         </div>
         <div class="col d-flex justify-content-around align-items-center">
-          <a class="btn btn-primary" href="#profile"><i class="fas fa-user-alt"></i>Profile</a>
-          <a class="btn btn-primary" href="#skill"><i class="fas fa-clipboard-list"></i>Skill</a>
-          <a class="btn btn-primary" href="#work"><i class="fas fa-laptop-code"></i>Work</a>
+          {% if template == "index" %}
+            <a class="btn btn-primary" href="#profile"><i class="fas fa-user-alt"></i>Profile</a>
+            <a class="btn btn-primary" href="#skill"><i class="fas fa-clipboard-list"></i>Skill</a>
+            <a class="btn btn-primary" href="#work"><i class="fas fa-laptop-code"></i>Work</a>
+          {% endif %}
         </div>
       </div>
     </div>
